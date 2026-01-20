@@ -1,17 +1,18 @@
-""" Wrapper for a [ROS2 Timer] that mimics the interface of 
+"""
+Wrapper for a [ROS2 Timer] that mimics the interface of
     the [Timer][threading_timer] class of the Python [threading] package.
 
 Also see [rclcpp::TimerBase].
 
 
-Examples
+Examples:
 --------
 
 Define a timer period for this example.
 
 >>> timer_period_s = 0.050
 
-Define a tolerance allowed for timing jitter. This should be a fraction of the 
+Define a tolerance allowed for timing jitter. This should be a fraction of the
 timer period. Ideally, it will be less than a millisecond.
 
 >>> tolerance_s = 0.001
@@ -22,7 +23,7 @@ Create a ROS2 node and retrieve a ROS2 timer.
 >>> import rclpy.node
 >>> rclpy.init()
 >>> node = rclpy.node.Node('test')
->>> ros_timer = node.create_timer(timer_period_sec=timer_period_s, 
+>>> ros_timer = node.create_timer(timer_period_sec=timer_period_s,
 ...                               callback=lambda: print('Timeout'))
 
 Wrap the ROS2 timer with a threading-style timer class.
@@ -61,7 +62,7 @@ Verify that a new timer can be created and run.
 >>> timer.join(timeout=timer_period_s + tolerance_s)
 New timer timeout
 
-Start a new timer, wait half of the timeout interval, and then cancel it. The 
+Start a new timer, wait half of the timeout interval, and then cancel it. The
 callback is not invoked.
 
 >>> timer = Timer(function=lambda: print('New timeout'),
@@ -111,7 +112,7 @@ References
 
 [threading_thread]: https://docs.python.org/3/library/threading.html#threading.Thread
 
-[rclpy.timer.Timer]: https://docs.ros2.org/latest/api/rclpy/api/timers.html#rclpy.timer.Timer 
+[rclpy.timer.Timer]: https://docs.ros2.org/latest/api/rclpy/api/timers.html#rclpy.timer.Timer
 
 [rclcpp::TimerBase]: https://docs.ros2.org/latest/api/rclcpp/classrclcpp_1_1TimerBase.html
 
@@ -122,15 +123,14 @@ References
 """
 
 # Copyright 2022 Carnegie Mellon University Neuromechatronics Lab (a.whit)
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
-# 
+#
 # Contact: a.whit (nml@whit.contact)
 
-
 # Import local modules.
-from .threading import TimerWrapper
+from .threading import TimerWrapper as TimerWrapper
 
-
+__all__ = ["TimerWrapper"]
